@@ -2,7 +2,7 @@
 ______________________________________________
 <h2>Instalação:</h2>
 <ol>
-git clone https://github.com/tchelospy/Kali-Termux-update
-cd Kali-Termux-update
-sh Kali-Termux-update.sh
+  git clone https://github.com/tchelospy/Kali-Termux-update
+  cd Kali-Termux-update
+  sh Kali-Termux-update.sh
 </ol>
