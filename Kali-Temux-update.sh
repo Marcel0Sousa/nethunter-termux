@@ -72,8 +72,6 @@ chmod 700 /data/data/com.termux/files/usr/bin/kali
 echo
 echo 
 echo "Now You Can Start Kali Linux (Nethunter) By :--> kali"
-cd
-rm -rf Kali-Termux-update
 ;;
 2)
 echo "prerequisites are installing.........."
@@ -98,8 +96,6 @@ chmod 700 /data/data/com.termux/files/usr/bin/kali
 echo
 echo 
 echo "Now You Can Start Kali Linux (Nethunter) By :--> kali"
-cd
-rm -rf Kali-Termux-update
 ;;
 3)
 echo
@@ -125,8 +121,6 @@ chmod 700 /data/data/com.termux/files/usr/bin/kali
 echo
 echo 
 echo "Now You Can Start Kali Linux (Nethunter) By :--> kali"
-cd
-rm -rf Kali-Termux-update
 ;;
 4)
 echo "prerequisites are installing.........."
@@ -151,8 +145,6 @@ chmod 700 /data/data/com.termux/files/usr/bin/kali
 echo
 echo 
 echo "Now You Can Start Kali Linux (Nethunter) By :--> kali"
-cd
-rm -rf Kali-Termux-update
 ;;
 5)
 echo
