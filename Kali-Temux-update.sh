@@ -70,7 +70,7 @@ cat startkali.sh > /data/data/com.termux/files/usr/bin/kali
 chmod 700 /data/data/com.termux/files/usr/bin/kali
 echo
 echo 
-echo "Now You Can Start Kali Linux (Nethunter) By :--> kali"
+echo "Now You Can Start Kali Linux (Nethunter) By :--> ./startkali.sh or kali"
 ./startkali.sh
 ;;
 2)
@@ -95,7 +95,7 @@ cat startkali.sh > /data/data/com.termux/files/usr/bin/kali
 chmod 700 /data/data/com.termux/files/usr/bin/kali
 echo
 echo 
-echo "Now You Can Start Kali Linux (Nethunter) By :--> kali"
+echo "Now You Can Start Kali Linux (Nethunter) By :--> ./startkali.sh or kali"
 ./startkali.sh
 ;;
 3)
@@ -121,7 +121,7 @@ cat startkali.sh > /data/data/com.termux/files/usr/bin/kali
 chmod 700 /data/data/com.termux/files/usr/bin/kali
 echo
 echo 
-echo "Now You Can Start Kali Linux (Nethunter) By :--> kali"
+echo "Now You Can Start Kali Linux (Nethunter) By :--> ./startkali.sh or kali"
 ./startkali.sh
 ;;
 4)
@@ -146,7 +146,7 @@ cat startkali.sh > /data/data/com.termux/files/usr/bin/kali
 chmod 700 /data/data/com.termux/files/usr/bin/kali
 echo
 echo 
-echo "Now You Can Start Kali Linux (Nethunter) By :--> kali"
+echo "Now You Can Start Kali Linux (Nethunter) By :--> ./startkali.sh or kali"
 ./startkali.sh
 ;;
 5)
