@@ -81,7 +81,7 @@ echo "installed successfully.... :D"
 echo
 echo "Now Kali Nethunter Is Installing......."
 echo
-wget http://download999.mediafire.com/9s6i96utk9ig/zd24tvzw87689pc/kalifs-armhf-full.tar.gz
+wget https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-full.tar.xz
 echo
 proot --link2symlink tar -xf kalifs-armhf-full.tar.xz
 cd kali-armhf && echo "nameserver 8.8.8.8" > etc/resolv.conf
