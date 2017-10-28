@@ -106,7 +106,6 @@ echo "installed successfully.... :D"
 echo
 echo "Now Kali Nethunter Is Installing......."
 echo
-#Kali oficial
 wget https://build.nethunter.com/kalifs/kalifs-latest/kalifs-arm64-minimal.tar.xz
 echo
 proot --link2symlink tar -xf kalifs-arm64-minimal.tar.xz
@@ -131,8 +130,8 @@ echo "installed successfully.... :D"
 echo
 echo "Now Kali Nethunter Is Installing......."
 echo
-wget http://download1520.mediafire.com/8bozy2h2rx7g/f63bor2f7f66yvh/kali-armhf.tar.gz 
-#wget https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-minimal.tar.xz
+#wget http://download1520.mediafire.com/8bozy2h2rx7g/f63bor2f7f66yvh/kali-armhf.tar.gz 
+wget https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-minimal.tar.xz
 echo
 proot --link2symlink tar -xf kali-armhf.tar.gz
 cd kali-armhf && echo "nameserver 8.8.8.8" > etc/resolv.conf
