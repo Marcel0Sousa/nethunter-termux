@@ -1,30 +1,33 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
+red='\033[0;31m'
+echo "$red Atualizando Repositórios..."
+apt update && apt upgrade -y
+echo "Instalando Requisitos..."
+apt install wget proot tar -y
 echo
-DIRECTORY="/data/data/com.termux/files/usr/share/figlet"
-if [ ! -d "$DIRECTORY" ]; then
-apt update && apt install figlet
-fi
-figlet -f mini    .....KALI-NETHUNTER.....
-echo 
-figlet Subscribe
-k='\033[0;31m'
-echo "${k}▀█▀ █▀▀ ▄▀ █░░ ▀▀▀▀█ ▀ █▄░█ █▀▄ ▀ ▄▀▄"
-echo "${k}░█░ █▀▀ █░ █▀▄ ░▄▀▀░ █ █░▀█ █░█ █ █▀█"
-echo "${k}░▀░ ▀▀▀ ░▀ ▀░▀ ▀▀▀▀▀ ▀ ▀░░▀ ▀▀░ ▀ ▀░▀"
-echo
-echo "${k}_/_/_/_/_/          _/                  _/           ";
-echo "${k}   _/      _/_/_/  _/_/_/      _/_/    _/    _/_/    ";
-echo "${k}  _/    _/        _/    _/  _/_/_/_/  _/  _/    _/   ";
-echo "${k} _/    _/        _/    _/  _/        _/  _/    _/    ";
-echo "${k}_/      _/_/_/  _/    _/    _/_/_/  _/    _/_/       ";
-echo
-echo "${k}██╗  ██╗ █████╗ ██╗     ██╗";
-echo "${k}██║ ██╔╝██╔══██╗██║     ██║";
-echo "${k}█████╔╝ ███████║██║     ██║";
-echo "${k}██╔═██╗ ██╔══██║██║     ██║";
-echo "${k}██║  ██╗██║  ██║███████╗██║";
-echo "${k}╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝";
+echo "Downloading NetHunter"
+		case `dpkg --print-architecture` in
+		aarch64)
+            architectureURL="arm64" ;;
+        arm)
+            architectureURL="armhf" ;;
+        amd64)
+            architectureURL="amd64" ;;
+        i*86)
+            architectureURL="i386" ;;
+        x86_64)
+            architectureURL="amd64" ;;
+        *)
+            echo "Arquitetura desconhecida"
 
+wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-${architectureURL}-minimal.tar.xz" -O kali-arm.tar.xz
+
+proot --link2symlink tar -xf kali-arm.tar.xz
+cd kali-arm && echo "nameserver 1.1.1.1" > etc/resolv.conf
+cd ../ && echo "proot --link2symlink -0 -r kali-arm64 -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
+chmod 700 startkali.sh && termux-fix-shebang startkali.sh
+echo "Para iniciar execute o comando ./startkali.sh"
+<< 'comentario'
 echo " ---------Special Thanks To Hax4us ;)-----------"
 echo "-------SUBSCRIBE TECHZINDIA YT CHANNEL------"
 echo
@@ -62,9 +65,9 @@ echo
 proot --link2symlink tar -xf kalifs-arm64-full.tar.xz
 cd kali-arm64 && echo "nameserver 8.8.8.8" > etc/resolv.conf
 
-cd ../ && echo "proot --link2symlink -0 -r kali-arm64 -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM /bin/bash --login" > startkali.sh
+cd ../ && echo "proot --link2symlink -0 -r kali-arm64 -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
 echo
-chmod 777 startkali.sh && termux-fix-shebang startkali.sh
+chmod 700 startkali.sh && termux-fix-shebang startkali.sh
 echo
 #cat startkali.sh > /data/data/com.termux/files/usr/bin/kali
 #chmod 700 /data/data/com.termux/files/usr/bin/kali
@@ -159,3 +162,4 @@ echo $aarch
 fi
 ;;
 esac
+comentario
