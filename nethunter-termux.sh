@@ -7,22 +7,30 @@ echo "${colorred}Instalando Requisitos..."
 echo
 echo
 colorred='\033[0;31m'
-echo "${colorred}Downloading NetHunter..."
+echo "${colorred}.:: NetHunter Android ::."
 case `dpkg --print-architecture` in
-	aarch64)
-        echo "Arquitetura em desenvolvimento" ;;
+	arm64)
+        echo "1) Download NetHunter Arm64 (completo)"
+        echo "2) Download NetHunter Arm64 (nano)"
+        echo "3) Cancelar download"
+        read arm64Opcao
+        case $arm64Opcao in
+            1)
+
+        esac
+    ;;
     arm)
         echo "1) Download NetHunter arm (completo)"
         echo "2) Download NetHunter arm (nano)"
-        echo "3) Cancelar o download"
+        echo "3) Cancelar download"
         read armOpcao
         case $armOpcao in
             1)
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-full.tar.xz" -O kali-armhf.tar.xz
-
+            erroexec= unset LD_PRELOAD
             proot --link2symlink tar -xf kali-armhf.tar.xz
             cd kali-armhf && echo "nameserver 1.1.1.1" > etc/resolv.conf
-            cd ../ && echo "unset LD_PRELOAD proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
+            cd ../ && echo "$erroexec proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
             chmod 700 startkali.sh && termux-fix-shebang startkali.sh
             clear
             echo "Para iniciar execute o comando ./startkali.sh"
@@ -41,6 +49,7 @@ case `dpkg --print-architecture` in
             ;;
             3)
             echo "Download cancelado :("
+            echo
             ;;
         esac
     ;;
