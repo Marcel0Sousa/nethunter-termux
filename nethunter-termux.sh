@@ -27,10 +27,10 @@ case `dpkg --print-architecture` in
         case $armOpcao in
             1)
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-full.tar.xz" -O kali-armhf.tar.xz
-            erroexec= unset LD_PRELOAD
+            #erroexec= unset LD_PRELOAD
             proot --link2symlink tar -xf kali-armhf.tar.xz
             cd kali-armhf && echo "nameserver 1.1.1.1" > etc/resolv.conf
-            cd ../ && echo "$erroexec proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
+            cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
             chmod 700 startkali.sh && termux-fix-shebang startkali.sh
             clear
             echo "Para iniciar execute o comando ./startkali.sh"
