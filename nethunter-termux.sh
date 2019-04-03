@@ -1,59 +1,64 @@
-#!/bin/bash
-red='\033[0;31m'
-echo "${red} Atualizando Repositórios..."
-apt update && apt upgrade -y
-echo "${red}Instalando Requisitos..."
-apt install wget proot tar -y
+#!/bin/dash
+colorred='\033[0;31m'
+echo "${colorred}Atualizando Repositórios..."
+#apt update && apt upgrade -y
+echo "${colorred}Instalando Requisitos..."
+#apt install wget proot tar -y
 echo
 echo
-
-echo "${red}Downloading NetHunter..."
-		case `dpkg --print-architecture` in
-		aarch64)
-            architectureURL="arm64" ;;
-        arm)
-            #architectureURL="armhf" ;;
-            echo "Selecione a versão do NetHunter:"
-            echo "${red}1) Versão completa (Armhf)"
-            echo "${red}2) Versão nano (Armhf)"
-            read opcao
-            case $opcao in
+colorred='\033[0;31m'
+echo "${colorred}Downloading NetHunter..."
+case `dpkg --print-architecture` in
+	aarch64)
+        echo "Arquitetura em desenvolvimento" ;;
+    arm)
+        echo "1) Download NetHunter arm (completo)"
+        echo "2) Download NetHunter arm (nano)"
+        echo "3) Cancelar o download"
+        read armOpcao
+        case $armOpcao in
             1)
-
-            wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-${architectureURL}-full.tar.xz" -O kali-arm.tar.xz
-            # Download
-            #wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-minimal.tar.xz" -O kali-armhf.tar.xz
+            wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-full.tar.xz" -O kali-armhf.tar.xz
 
             proot --link2symlink tar -xf kali-armhf.tar.xz
             cd kali-armhf && echo "nameserver 1.1.1.1" > etc/resolv.conf
-            cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
-            unset LD_PRELOAD
+            cd ../ && echo "unset LD_PRELOAD proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
             chmod 700 startkali.sh && termux-fix-shebang startkali.sh
+            clear
             echo "Para iniciar execute o comando ./startkali.sh"
-
+            echo
             ;;
-
             2)
-
-            wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-${architectureURL}-minimal.tar.xz" -O kali-arm.tar.xz
-            # Download
-            #wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-minimal.tar.xz" -O kali-armhf.tar.xz
+            wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-minimal.tar.xz" -O kali-armhf.tar.xz
 
             proot --link2symlink tar -xf kali-armhf.tar.xz
             cd kali-armhf && echo "nameserver 1.1.1.1" > etc/resolv.conf
-            cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
-            unset LD_PRELOAD
+            cd ../ && echo "unset LD_PRELOAD proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
             chmod 700 startkali.sh && termux-fix-shebang startkali.sh
+            clear
             echo "${red}Para iniciar execute o comando ./startkali.sh"
-
+            echo
             ;;
-            esac
-        amd64)
-            architectureURL="amd64" ;;
-        i*86)
-            architectureURL="i386" ;;
-        x86_64)
-            architectureURL="amd64" ;;
-        *)
-            echo "Arquitetura desconhecida";;
-	esac
+            3)
+            echo "Download cancelado :("
+            ;;
+        esac
+    ;;
+    amd64)
+    echo "1)"
+    echo "2)"
+    echo "3)"
+    read opcao
+    case $opcao in
+        1)
+        echo ""
+        ;;
+        2)
+        echo ""
+        ;;
+        3)
+        echo ""
+        ;;
+        esac
+    ;;
+esac
