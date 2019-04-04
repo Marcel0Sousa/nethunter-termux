@@ -41,6 +41,8 @@ case `dpkg --print-architecture` in
             ;;
 
             2)
+            echo
+            echo "${colorred}Downloading NetHunter..."
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-minimal.tar.xz" -O kali-armhf.tar.xz
             
             proot --link2symlink tar -xf kali-armhf.tar.xz --exclude='dev'||:
@@ -53,12 +55,12 @@ case `dpkg --print-architecture` in
             #!/bin/bash
             kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
             unset LD_PRELOAD
-            proot --link2symlink -0 -r kali-armhf -b ${kaliArm}dev/ -b ${kaliArm}proc/ -b ${kaliArm}sys/ -b ${kaliArm}system/ -b ${kaliArm}mnt -w ${kaliArm}root ${kaliArm}usr/bin/env -i HOME=${kaliArm}root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login
+            proot --link2symlink -0 -r kali-armhf -b /dev/ -b /proc/ -b /sys/ -b /system/ -b /mnt -w /root /usr/bin/env -i HOME=/home PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login
 OEM
             chmod 700 kali.sh && termux-fix-shebang kali.sh
             rm kali-armhf.tar.xz
             clear
-            echo "${red}Para iniciar execute o comando ./startkali.sh"
+            echo "${red}Para iniciar execute o comando ./kali.sh"
             echo
             ;;
             3)
