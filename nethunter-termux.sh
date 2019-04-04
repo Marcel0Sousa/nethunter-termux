@@ -48,18 +48,17 @@ case `dpkg --print-architecture` in
             proot --link2symlink tar -xf kali-armhf.tar.xz --exclude='dev'||:
             cd kali-armhf && echo "nameserver 8.8.8.8" > etc/resolv.conf
             cd ..
-            #cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b ${kaliArm}dev/ -b ${kaliArm}proc/ -b ${kaliArm}sys/ -b ${kaliArm}system/ -b ${kaliArm}mnt -w ${kaliArm}root ${kaliArm}usr/bin/env -i HOME=${kaliArm}root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
-            bin=kali.sh
-            echo "Criando iniciador"
+            bin=startkali.sh
+            echo "${colorred}Montando Sistema..."
             cat > $bin <<- OEM
             #!/bin/bash
             unset LD_PRELOAD
-            proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b ${kaliArm}home -b ${kaliArm}system/ -b /mnt -w /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login
+            proot --link2symlink -0 -r kali-armhf -b /dev/ -b ${kaliArm}sys/ -b /proc/ -b ${kaliArm}root -b ${kaliArm}home -b ${kaliArm}system/ -b ${kaliArm}mnt /usr/bin/env -i HOME=${kaliArm}root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login
 OEM
-            chmod 700 kali.sh && termux-fix-shebang kali.sh
+            chmod 700 startkali.sh && termux-fix-shebang startkali.sh
             rm kali-armhf.tar.xz
             clear
-            echo "${red}Para iniciar execute o comando ./kali.sh"
+            echo "${red}Para iniciar execute o comando ./startkali.sh"
             echo
             ;;
             3)
