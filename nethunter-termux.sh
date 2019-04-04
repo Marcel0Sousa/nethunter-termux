@@ -44,7 +44,7 @@ case `dpkg --print-architecture` in
             echo
             echo "${colorred}Downloading NetHunter..."
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-minimal.tar.xz" -O kali-armhf.tar.xz
-            
+            kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
             proot --link2symlink tar -xf kali-armhf.tar.xz --exclude='dev'||:
             cd kali-armhf && echo "nameserver 8.8.8.8" > etc/resolv.conf
             cd ..
@@ -53,9 +53,8 @@ case `dpkg --print-architecture` in
             echo "Criando iniciador"
             cat > $bin <<- OEM
             #!/bin/bash
-            kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
             unset LD_PRELOAD
-            proot --link2symlink -0 -r kali-armhf -b /dev/ -b /proc/ -b /sys/ -b /system/ -b /mnt -w /root /usr/bin/env -i HOME=/home PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login
+            proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b ${kaliArm}home -b ${kaliArm}system/ -b /mnt -w /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login
 OEM
             chmod 700 kali.sh && termux-fix-shebang kali.sh
             rm kali-armhf.tar.xz
