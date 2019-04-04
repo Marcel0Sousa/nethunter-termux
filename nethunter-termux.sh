@@ -27,7 +27,7 @@ case `dpkg --print-architecture` in
         case $armOpcao in
             1)
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-full.tar.xz" -O kali-armhf.tar.xz
-            
+            kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
             proot --link2symlink tar -xf kali-armhf.tar.xz
             cd kali-armhf && echo "nameserver 8.8.8.8" > etc/resolv.conf
             #cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
@@ -35,6 +35,7 @@ case `dpkg --print-architecture` in
             cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b ${kaliArm}dev/ -b ${kaliArm}proc/ -b ${kaliArm}sys/ -b ${kaliArm}system/ -b ${kaliArm}mnt -w ${kaliArm}root ${kaliArm}usr/bin/env -i HOME=${kaliArm}root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
             unset LD_PRELOAD
             chmod 700 startkali.sh && termux-fix-shebang startkali.sh
+            rm kali-armhf.tar.xz
             clear
             echo "Para iniciar execute o comando ./startkali.sh"
             echo
@@ -48,6 +49,7 @@ case `dpkg --print-architecture` in
             cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b ${kaliArm}dev/ -b ${kaliArm}proc/ -b ${kaliArm}sys/ -b ${kaliArm}system/ -b ${kaliArm}mnt -w ${kaliArm}root ${kaliArm}usr/bin/env -i HOME=${kaliArm}root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
             unset LD_PRELOAD
             chmod 700 startkali.sh && termux-fix-shebang startkali.sh
+            rm kali-armhf.tar.xz
             clear
             echo "${red}Para iniciar execute o comando ./startkali.sh"
             echo
