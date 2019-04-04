@@ -30,8 +30,7 @@ case `dpkg --print-architecture` in
             kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
             proot --link2symlink tar -xf kali-armhf.tar.xz
             cd kali-armhf && echo "nameserver 8.8.8.8" > etc/resolv.conf
-            #cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt -w /root /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
-            #cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b /dev/ -b /proc/ -b /data/data/com.termux/files/home/nethunter-termux/kali-armhf/sys/ -b /data/data/com.termux/files/home/nethunter-termux/kali-armhf/system -b /data/data/com.termux/files/home/nethunter-termux/kali-armhf/mnt -b /data/data/com.termux/files/home/nethunter-termux/kali-armhf/root /usr/bin/env -i HOME=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
+            
             cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b ${kaliArm}dev/ -b ${kaliArm}proc/ -b ${kaliArm}sys/ -b ${kaliArm}system/ -b ${kaliArm}mnt -w ${kaliArm}root ${kaliArm}usr/bin/env -i HOME=${kaliArm}root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
             unset LD_PRELOAD
             chmod 700 startkali.sh && termux-fix-shebang startkali.sh
@@ -40,14 +39,50 @@ case `dpkg --print-architecture` in
             echo "Para iniciar execute o comando ./startkali.sh"
             echo
             ;;
+
             2)
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-minimal.tar.xz" -O kali-armhf.tar.xz
             kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
-            proot --link2symlink tar -xf kali-armhf.tar.xz
+            proot --link2symlink tar -xf kali-armhf.tar.xz --exclude='dex'||:
             cd kali-armhf && echo "nameserver 8.8.8.8" > etc/resolv.conf
-            #cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home/nethunter-termux/kali-armhf/sys/ -b /data/data/com.termux/files/home/nethunter-termux/kali-armhf/system -b /data/data/com.termux/files/home/nethunter-termux/kali-armhf/mnt -b /data/data/com.termux/files/home/nethunter-termux/kali-armhf/root /usr/bin/env -i HOME=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
-            cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b ${kaliArm}dev/ -b ${kaliArm}proc/ -b ${kaliArm}sys/ -b ${kaliArm}system/ -b ${kaliArm}mnt -w ${kaliArm}root ${kaliArm}usr/bin/env -i HOME=${kaliArm}root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
+            cd ..
+            #cd ../ && echo "proot --link2symlink -0 -r kali-armhf -b ${kaliArm}dev/ -b ${kaliArm}proc/ -b ${kaliArm}sys/ -b ${kaliArm}system/ -b ${kaliArm}mnt -w ${kaliArm}root ${kaliArm}usr/bin/env -i HOME=${kaliArm}root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login" > startkali.sh
+            #unset LD_PRELOAD
+            
+            mkdir -p binds
+            bin=kali.sh
+            echo "Criando iniciador"
+            cat > $bin <<- OEM
+            #!/bin/bash
             unset LD_PRELOAD
+            comando+="proot"
+            comando+=" --link2symlink"
+            comando+=" -0"
+            comando+=" -r kali-armhf"
+            if [ -n "\$(ls -A binds")]; then
+                for f in binds/* ;do
+                    . \$f
+                done
+            fi
+            comando+=" -b ${kaliArm}dev/"
+            comando+=" -b ${kaliArm}proc/"
+            comando+=" -b ${kaliArm}sys/"
+            comando+=" -b ${kaliArm}system/"
+            comando+=" -b ${kaliArm}mnt"
+            comando+=" -w ${kaliArm}root"
+            comando+=" ${kaliArm}usr/bin/env -i"
+            comando+=" HOME=${kaliArm}root"
+            comando+=" PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games"
+            comando+=" TERM=$TERM"
+            comando+=" LANG=C.UTF-8"
+            comando+=" /bin/bash --login"
+            com+="\$@"
+            if [-z "\$1"]; then
+                exec \$comando
+            else
+                \$comando -c "\$com"
+            fi
+OEM
             chmod 700 startkali.sh && termux-fix-shebang startkali.sh
             rm kali-armhf.tar.xz
             clear
