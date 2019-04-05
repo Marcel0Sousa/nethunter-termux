@@ -9,7 +9,7 @@ echo
 colorred='\033[0;31m'
 echo "${colorred}.:: NetHunter Android ::."
 case `dpkg --print-architecture` in
-	arm)
+	amd64)
         echo "1) Download NetHunter Arm64 (completo)"
         echo "2) Download NetHunter Arm64 (nano)"
         echo "3) Cancelar download"
@@ -56,8 +56,8 @@ OEM
             echo "${colorred}Downloading NetHunter..."
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-arm64-minimal.tar.xz" -O kali-arm64.tar.xz
             #kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
-            kali-arm64.tar.xz
-            proot --link2symlink tar -xf
+            tar -xf kali-arm64.tar.xz
+            proot --link2symlink
             echo "nameserver 8.8.8.8" > kali-arm64/etc/resolv.conf
             profile=.profile
             cat > $profile <<- OEM
@@ -88,7 +88,7 @@ OEM
             echo
         esac
     ;;
-    sarm)
+    arm)
         echo "1) Download NetHunter arm (completo)"
         echo "2) Download NetHunter arm (nano)"
         echo "3) Cancelar download"
