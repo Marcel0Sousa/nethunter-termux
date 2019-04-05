@@ -53,7 +53,7 @@ case `dpkg --print-architecture` in
             cat > $bin <<- OEM
             #!/bin/bash
             unset LD_PRELOAD
-            proot --link2symlink -0 -r kali-armhf -b ${kaliArm}dev/ -b ${kaliArm}sys/ -b /proc/ -b ${kaliArm}root -b ${kaliArm}home -b ${kaliArm}system/ -b ${kaliArm}mnt /usr/bin/env -i HOME=${kaliArm}root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 /bin/bash --login
+            proot --link2symlink -0 -r kali-armhf -b ${kaliArm}dev/ -b ${kaliArm}sys/ -b /proc/ -b ${kaliArm}root -b ${kaliArm}home -b ${kaliArm}system/ -b ${kaliArm}mnt /usr/bin/env -i HOME=${kaliArm}root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM LANG=C.UTF-8 ${kaliArm}bin/bash --login
 OEM
             chmod 700 startkali.sh && termux-fix-shebang startkali.sh
             rm kali-armhf.tar.xz
