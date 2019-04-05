@@ -220,6 +220,7 @@ OEM
             echo "${colorred}Downloading NetHunter..."
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-amd64-minimal.tar.xz" -O kali-amd64.tar.xz
             #kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
+            echo "${colorred}Descompactando Sistema..."
             tar -xf kali-amd64.tar.xz
             proot --link2symlink
             echo "nameserver 8.8.8.8" > kali-amd64/etc/resolv.conf
