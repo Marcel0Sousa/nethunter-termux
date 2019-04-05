@@ -127,7 +127,7 @@ OEM
             rm kali-armhf.tar.xz
             chmod 700 startkali.sh && termux-fix-shebang startkali.sh
             clear
-            echo "${red}Para iniciar execute o comando ./startkali.sh"
+            echo "${colorred}Para iniciar execute o comando ./startkali.sh"
             echo
             ;;
 
@@ -136,6 +136,7 @@ OEM
             echo "${colorred}Downloading NetHunter..."
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-minimal.tar.xz" -O kali-armhf.tar.xz
             #kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
+            echo "${colorred}Descompactando Sistema..."
             tar -xf kali-armhf.tar.xz
             proot --link2symlink
             echo "nameserver 8.8.8.8" > kali-armhf/etc/resolv.conf
