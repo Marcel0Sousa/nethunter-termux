@@ -46,8 +46,22 @@ case `dpkg --print-architecture` in
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-minimal.tar.xz" -O kali-armhf.tar.xz
             #kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
             proot --link2symlink tar -xf kali-armhf.tar.xz --exclude='dev'||:
-            cd kali-armhf && echo "nameserver 8.8.8.8" > etc/resolv.conf
-            cd ..
+            echo "nameserver 8.8.8.8" > hali-armhf/etc/resolv.conf
+            profile=.profile
+            cat > $profile <<- OEM
+            # ~/.profile: executed by Bourne-compatible login shells.
+
+            if [ "$BASH" ]; then
+            if [ -f ~/.bashrc ]; then
+                . ~/.bashrc
+            fi
+            fi
+
+            # Add /system/xbin to PATH
+            PATH="/root/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/system/xbin"$
+
+OEM
+            cat .profile > kali-armhf/root/.profile
             bin=startkali.sh
             echo "${colorred}Montando Sistema..."
             cat > $bin <<- OEM
