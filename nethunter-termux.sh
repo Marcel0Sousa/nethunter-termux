@@ -20,6 +20,7 @@ case `dpkg --print-architecture` in
             echo "${colorred}Downloading NetHunter..."
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-arm64-full.tar.xz" -O kali-arm64.tar.xz
             #kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
+            echo "${colorred}Descompactando Sistema..."
             tar -xf kali-arm64.tar.xz
             proot --link2symlink
             echo "nameserver 8.8.8.8" > kali-arm64/etc/resolv.conf
@@ -56,6 +57,7 @@ OEM
             echo "${colorred}Downloading NetHunter..."
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-arm64-minimal.tar.xz" -O kali-arm64.tar.xz
             #kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
+            echo "${colorred}Descompactando Sistema..."
             tar -xf kali-arm64.tar.xz
             proot --link2symlink
             echo "nameserver 8.8.8.8" > kali-arm64/etc/resolv.conf
@@ -99,6 +101,7 @@ OEM
             echo "${colorred}Downloading NetHunter..."
             wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-full.tar.xz" -O kali-armhf.tar.xz
             #kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
+            echo "${colorred}Descompactando Sistema..."
             tar -xf kali-armhf.tar.xz
             proot --link2symlink
             echo "nameserver 8.8.8.8" > kali-armhf/etc/resolv.conf
@@ -185,6 +188,7 @@ OEM
              echo "${colorred}Downloading NetHunter..."
              wget "https://build.nethunter.com/kalifs/kalifs-latest/kalifs-amd64-full.tar.xz" -O kali-amd64.tar.xz
              #kaliArm=/data/data/com.termux/files/home/nethunter-termux/kali-armhf/
+             echo "${colorred}Descompactando Sistema..."
              tar -xf kali-amd64.tar.xz
              proot --link2symlink
              echo "nameserver 8.8.8.8" > kali-amd64/etc/resolv.conf
