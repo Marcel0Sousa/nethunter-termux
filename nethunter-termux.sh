@@ -1,15 +1,15 @@
 #!/bin/dash
 colorred='\033[0;31m'
 echo "${colorred}Atualizando Repositórios..."
-#apt update && apt upgrade -y
+apt update && apt upgrade -y
 echo "${colorred}Instalando Requisitos..."
-#apt install wget proot tar -y
+apt install wget proot tar -y
 echo
 echo
 colorred='\033[0;31m'
 echo "${colorred}.:: NetHunter Android ::."
 case `dpkg --print-architecture` in
-	amd64)
+	arm64)
         echo "1) Download NetHunter Arm64 (completo)"
         echo "2) Download NetHunter Arm64 (nano)"
         echo "3) Cancelar download"
