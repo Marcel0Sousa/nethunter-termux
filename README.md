@@ -1,5 +1,8 @@
 
 <h2>Instalação:</h2>
-git clone https://github.com/tchelospy/Kali-Termux-update <br>
-cd Kali-Termux-update <br>
-sh Kali-Termux-update.sh <br>
+```
+git clone https://github.com/tchelospy/nethunter-termux
+cd nethunter-termux
+chmod +x nethunter-termux.sh
+./nethunter-termux.sh
+```
